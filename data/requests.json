@@ -1,0 +1,80 @@
+[
+  {
+    "id": "REQ-001",
+    "sku": "SKU-A1",
+    "qty": 200,
+    "supplierId": "SUP-1005",
+    "customerId": "CUST-2001",
+    "preferredLoc": "SG",
+    "amount": 12000,
+    "expedite": false,
+    "createdAt": "2026-06-27T08:10:00Z",
+    "summary": "Bearings to Singapore customer; proposed local SG stock.",
+    "_intent": "OPTIMAL — proposed SG is already the best route."
+  },
+  {
+    "id": "REQ-002",
+    "sku": "SKU-D4",
+    "qty": 1000,
+    "supplierId": "SUP-1001",
+    "customerId": "CUST-2004",
+    "preferredLoc": "SG",
+    "amount": 8500,
+    "expedite": false,
+    "createdAt": "2026-06-27T08:14:00Z",
+    "summary": "Brackets to India customer; ERP proposed shipping from SG.",
+    "_intent": "REROUTE — IN stock is local, cheaper & faster than proposed SG."
+  },
+  {
+    "id": "REQ-003",
+    "sku": "SKU-E5",
+    "qty": 50,
+    "supplierId": "SUP-1002",
+    "customerId": "CUST-2002",
+    "preferredLoc": "TW",
+    "amount": 68000,
+    "expedite": true,
+    "createdAt": "2026-06-27T08:20:00Z",
+    "summary": "Urgent sensor arrays to Germany; proposed long-haul from Taiwan.",
+    "_intent": "REROUTE — DE local stock beats 9,300km expedite from TW. DEMO STAR."
+  },
+  {
+    "id": "REQ-004",
+    "sku": "SKU-C3",
+    "qty": 40,
+    "supplierId": "SUP-1004",
+    "customerId": "CUST-2003",
+    "preferredLoc": "RU",
+    "amount": 95000,
+    "expedite": true,
+    "createdAt": "2026-06-27T08:26:00Z",
+    "summary": "Control boards to UK; proposed source is in a sanctioned region.",
+    "_intent": "REROUTE/REVIEW — RU route BLOCKED on compliance, reroute to TW."
+  },
+  {
+    "id": "REQ-005",
+    "sku": "SKU-B2",
+    "qty": 30,
+    "supplierId": "SUP-1003",
+    "customerId": "CUST-2002",
+    "preferredLoc": "SH",
+    "amount": 42000,
+    "expedite": false,
+    "createdAt": "2026-06-27T08:31:00Z",
+    "summary": "Printers to Germany; proposed 45-day lead from Shanghai.",
+    "_intent": "REROUTE — DE/TW far faster than the slow SH route."
+  },
+  {
+    "id": "REQ-006",
+    "sku": "SKU-A1",
+    "qty": 500,
+    "supplierId": "SUP-1002",
+    "customerId": "CUST-2001",
+    "preferredLoc": "DE",
+    "amount": 30000,
+    "expedite": false,
+    "createdAt": "2026-06-27T08:37:00Z",
+    "summary": "Bearings to Singapore; proposed distant DE stock.",
+    "_intent": "REROUTE — SG local stock beats shipping from Germany."
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "SKU-A1": {
+    "sku": "SKU-A1", "name": "Industrial Bearing 40mm",
+    "locations": [
+      { "loc": "SG", "available": 1200, "leadTimeDays": 3 },
+      { "loc": "DE", "available": 400, "leadTimeDays": 6 },
+      { "loc": "US", "available": 800, "leadTimeDays": 7 }
+    ]
+  },
+  "SKU-B2": {
+    "sku": "SKU-B2", "name": "Tabletop Printer 8in.",
+    "locations": [
+      { "loc": "TW", "available": 120, "leadTimeDays": 6 },
+      { "loc": "SH", "available": 60, "leadTimeDays": 20 },
+      { "loc": "DE", "available": 10, "leadTimeDays": 12 }
+    ]
+  },
+  "SKU-C3": {
+    "sku": "SKU-C3", "name": "Control Board v4",
+    "locations": [
+      { "loc": "RU", "available": 90, "leadTimeDays": 5 },
+      { "loc": "TW", "available": 200, "leadTimeDays": 9 },
+      { "loc": "AU", "available": 0, "leadTimeDays": 35 }
+    ]
+  },
+  "SKU-D4": {
+    "sku": "SKU-D4", "name": "Steel Bracket Pack",
+    "locations": [
+      { "loc": "IN", "available": 5400, "leadTimeDays": 2 },
+      { "loc": "SG", "available": 2000, "leadTimeDays": 4 }
+    ]
+  },
+  "SKU-E5": {
+    "sku": "SKU-E5", "name": "Precision Sensor Array",
+    "locations": [
+      { "loc": "TW", "available": 60, "leadTimeDays": 14 },
+      { "loc": "DE", "available": 60, "leadTimeDays": 4 },
+      { "loc": "SG", "available": 15, "leadTimeDays": 8 }
+    ]
+  }
+}

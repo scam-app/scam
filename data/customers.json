@@ -1,0 +1,6 @@
+{
+  "CUST-2001": { "id": "CUST-2001", "name": "Apex Retail Group", "country": "SG", "creditLimit": 500000, "outstandingBalance": 80000, "riskFlags": [], "orderCount": 142 },
+  "CUST-2002": { "id": "CUST-2002", "name": "Brightline Startups LLC", "country": "DE", "creditLimit": 50000, "outstandingBalance": 47000, "riskFlags": ["near_credit_limit"], "orderCount": 6 },
+  "CUST-2003": { "id": "CUST-2003", "name": "Cobalt Manufacturing", "country": "GB", "creditLimit": 300000, "outstandingBalance": 120000, "riskFlags": ["chargeback_history"], "orderCount": 38 },
+  "CUST-2004": { "id": "CUST-2004", "name": "Delta Wholesale", "country": "IN", "creditLimit": 250000, "outstandingBalance": 15000, "riskFlags": [], "orderCount": 91 }
+}

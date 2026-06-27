@@ -1,0 +1,7 @@
+{
+  "weights": { "geo": 1.2, "compliance": 1.5, "cost": 1.0, "speed": 1.0 },
+  "thresholds": {
+    "reviewAbove": 55,
+    "improvementMargin": 8
+  }
+}
