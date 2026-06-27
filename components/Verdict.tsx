@@ -82,6 +82,19 @@ export function Verdict({
       <div className="mt-4 pt-3 border-t border-edge text-xs font-mono text-muted">
         {decision.routerExplanation}
       </div>
+      {rec && decision.action !== "BLOCKED" && (
+        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono text-muted">
+          <span>score {risk} =</span>
+          <span>transit {rec.metrics.geo}</span>
+          <span>· compliance {rec.metrics.compliance}</span>
+          <span>· cost {rec.metrics.cost}</span>
+          <span>· speed {rec.metrics.speed}</span>
+          <span className="text-muted/60">(weighted; lower is better)</span>
+        </div>
+      )}
+      <div className="mt-1 text-[10px] text-muted/70 font-mono">
+        bands: &lt;50 ship · ≥50 review · sanctioned / out-of-stock routes removed → blocked
+      </div>
     </div>
   );
 }

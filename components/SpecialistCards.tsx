@@ -19,7 +19,7 @@ export function SpecialistCards({ decision }: { decision: DecisionTrace | null }
         <span className="font-display font-semibold text-sm tracking-wide">
           Specialist assessment
         </span>
-        <span className="text-[11px] text-muted ml-2">of the recommended route</span>
+        <span className="text-[11px] text-muted ml-2">of the recommended route · 0–100, lower is better</span>
       </div>
       <div className="p-4 grid sm:grid-cols-3 gap-3">
         {decision.verdicts.map((v) => (

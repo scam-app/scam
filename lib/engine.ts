@@ -24,7 +24,7 @@ export async function runDecision(
         ? `BLOCKED — ${r.blockReason}`
         : !r.feasible
         ? `infeasible — stock ${r.available} < ${req.qty} needed`
-        : `${r.distanceKm}km · lead ${r.leadTimeDays}d${r.signal ? ` · ⚠ ${r.signal.label}` : ""} → score ${r.score}${r.isRecommended ? " ✓ recommended" : ""}`,
+        : `${r.distanceKm}km · lead ${r.leadTimeDays}d${r.signal ? ` · ⚠ ${r.signal.label}` : ""} · transit ${r.metrics.geo}/cost ${r.metrics.cost}/speed ${r.metrics.speed} → score ${r.score}${r.isRecommended ? " ✓ recommended" : ""}`,
       data: r,
     });
   }

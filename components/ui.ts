@@ -39,9 +39,9 @@ export function riskColor(score: number): string {
 }
 
 export const dimensionLabel: Record<string, string> = {
-  reliability: "Reliability",
-  cost: "Cost / Margin",
-  service: "Service / Feasibility",
-  geo: "Geographic / Transit",
-  compliance: "Compliance",
+  reliability: "Reliability risk",
+  cost: "Cost risk",
+  service: "Service risk",
+  geo: "Transit risk",
+  compliance: "Compliance risk",
 };

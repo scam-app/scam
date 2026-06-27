@@ -70,13 +70,25 @@ export function computeMetrics(
 }
 
 // ---- weighted score from metrics + policy (lower = better) -----------------
+// Only dimensions that are actually elevated count — a 0 doesn't dilute the
+// average. This keeps clean routes low and lets genuinely bad routes rise.
 export function scoreMetrics(m: RouteMetrics, policy: Policy): number {
   const w = policy.weights;
-  const total = w.geo + w.compliance + w.cost + w.speed || 1;
-  return Math.round(
-    (m.geo * w.geo + m.compliance * w.compliance + m.cost * w.cost + m.speed * w.speed) /
-      total
-  );
+  const dims: [keyof RouteMetrics, number][] = [
+    ["geo", m.geo],
+    ["compliance", m.compliance],
+    ["cost", m.cost],
+    ["speed", m.speed],
+  ];
+  let num = 0;
+  let den = 0;
+  for (const [k, v] of dims) {
+    if (v > 0) {
+      num += v * (w as any)[k];
+      den += (w as any)[k];
+    }
+  }
+  return den === 0 ? 0 : Math.round(num / den);
 }
 
 // ---- rank candidates + pick a decision (PURE; client-safe; instant) --------
@@ -126,40 +138,42 @@ export function rankAndDecide(
   const best = usable[0];
   const proposed = scored.find((r) => r.isProposed);
   const margin = policy.thresholds.improvementMargin;
-
-  let action: RouteAction;
-  let recommended = best;
-  let explanation: string;
-
+  const reviewLine = policy.thresholds.reviewAbove;
   const proposedUsable = proposed && proposed.score !== Infinity;
 
-  if (proposedUsable && best.loc === proposed!.loc) {
-    action = best.score >= policy.thresholds.reviewAbove ? "REVIEW" : "OPTIMAL";
-    explanation =
-      action === "OPTIMAL"
-        ? `Proposed route from ${best.source?.name} is already optimal (score ${best.score}).`
-        : `Best route from ${best.source?.name} scores ${best.score} ≥ ${policy.thresholds.reviewAbove} — flag for review.`;
-  } else if (!proposedUsable) {
-    action = "REROUTE";
-    const why = proposed?.blocked
-      ? `proposed ${proposed.source?.name} route is blocked`
-      : `proposed ${proposed?.source?.name ?? "?"} route can't fulfil the order`;
-    explanation = `Reroute to ${best.source?.name} (score ${best.score}) — ${why}.`;
-  } else if (best.score <= proposed!.score - margin) {
-    action = "REROUTE";
-    const sig = proposed!.signal;
-    explanation = sig
-      ? `Reroute to ${best.source?.name} — proposed ${proposed!.source?.name} lane hit by ${sig.label}, which a static ERP allocation can't see.`
-      : `Reroute to ${best.source?.name} (score ${best.score}) — beats proposed ${proposed!.source?.name} (${proposed!.score}) by ${proposed!.score - best.score}.`;
-  } else {
-    // proposed is close enough to best — keep it
+  // Choose the recommended route: keep the proposed one if it's within `margin`
+  // of the best; otherwise switch to the best.
+  let recommended = best;
+  if (proposedUsable && proposed!.score <= best.score + margin) {
     recommended = proposed!;
-    action =
-      proposed!.score >= policy.thresholds.reviewAbove ? "REVIEW" : "OPTIMAL";
-    explanation =
-      action === "OPTIMAL"
-        ? `Proposed route from ${proposed!.source?.name} is within ${margin} of best — keep it (score ${proposed!.score}).`
-        : `Proposed route scores ${proposed!.score} ≥ ${policy.thresholds.reviewAbove} — flag for review.`;
+  }
+  const rerouted = !proposedUsable || recommended.loc !== proposed!.loc;
+
+  // Decision priority: REVIEW (even the best is risky) > REROUTE > OPTIMAL.
+  let action: RouteAction;
+  let explanation: string;
+
+  if (recommended.score >= reviewLine) {
+    action = "REVIEW";
+    explanation = rerouted
+      ? `Best available route (${recommended.source?.name}) still scores ${recommended.score} ≥ ${reviewLine} — reroute and flag for review.`
+      : `Best route (${recommended.source?.name}) scores ${recommended.score} ≥ ${reviewLine} — flag for a human.`;
+  } else if (rerouted) {
+    action = "REROUTE";
+    const sig = proposed?.signal;
+    if (!proposedUsable) {
+      const why = proposed?.blocked
+        ? `proposed ${proposed.source?.name} route is blocked (${proposed.blockReason})`
+        : `proposed ${proposed?.source?.name ?? "?"} route can't fulfil the order`;
+      explanation = `Reroute to ${recommended.source?.name} (score ${recommended.score}) — ${why}.`;
+    } else if (sig) {
+      explanation = `Reroute to ${recommended.source?.name} — proposed ${proposed!.source?.name} lane hit by ${sig.label}, which a static ERP allocation can't see.`;
+    } else {
+      explanation = `Reroute to ${recommended.source?.name} (score ${recommended.score}) — beats proposed ${proposed!.source?.name} (${proposed!.score}) by ${proposed!.score - recommended.score}.`;
+    }
+  } else {
+    action = "OPTIMAL";
+    explanation = `Proposed route from ${recommended.source?.name} is already best (score ${recommended.score}).`;
   }
 
   const final = scored.map((r) => ({

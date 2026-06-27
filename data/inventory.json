@@ -37,5 +37,12 @@
       { "loc": "DE", "available": 60, "leadTimeDays": 4 },
       { "loc": "SG", "available": 15, "leadTimeDays": 8 }
     ]
+  },
+  "SKU-F6": {
+    "sku": "SKU-F6", "name": "Specialized Actuator",
+    "locations": [
+      { "loc": "RU", "available": 80, "leadTimeDays": 6 },
+      { "loc": "AU", "available": 0, "leadTimeDays": 40 }
+    ]
   }
 }
