@@ -1,0 +1,7 @@
+{
+  "SUP-1001": { "id": "SUP-1001", "name": "Meridian Components Co.", "coo": "DE", "ageMonths": 48, "rating": 4.7, "flags": [] },
+  "SUP-1002": { "id": "SUP-1002", "name": "Anhui Rapid Parts Ltd.", "coo": "CN", "ageMonths": 2, "rating": 3.1, "flags": ["new_supplier"] },
+  "SUP-1003": { "id": "SUP-1003", "name": "Gulf Logistics FZE", "coo": "AE", "ageMonths": 19, "rating": 4.1, "flags": ["late_delivery"] },
+  "SUP-1004": { "id": "SUP-1004", "name": "Volga Trade OOO", "coo": "RU", "ageMonths": 30, "rating": 3.8, "flags": ["disputed_invoice"] },
+  "SUP-1005": { "id": "SUP-1005", "name": "Northwind Supplies Inc.", "coo": "US", "ageMonths": 60, "rating": 4.9, "flags": [] }
+}

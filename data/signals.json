@@ -1,0 +1,6 @@
+{
+  "SKU-D4:SG": { "kind": "disruption", "label": "Port congestion at Singapore PSA (+6d dwell)", "source": "live port feed", "costDelta": 8, "speedDelta": 30, "geoDelta": 0 },
+  "SKU-E5:TW": { "kind": "surcharge", "label": "Taiwan Strait risk — carrier surcharge +22%", "source": "carrier rate feed", "costDelta": 25, "speedDelta": 0, "geoDelta": 12 },
+  "SKU-A1:DE": { "kind": "surcharge", "label": "Europe→Asia fuel surcharge +12%", "source": "carrier rate feed", "costDelta": 15, "speedDelta": 0, "geoDelta": 0 },
+  "SKU-C3:RU": { "kind": "disruption", "label": "Airspace closure over sanctioned corridor", "source": "geopolitical feed", "costDelta": 20, "speedDelta": 20, "geoDelta": 10 }
+}
