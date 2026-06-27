@@ -30,29 +30,3 @@ then returns one of:
 **Principle: deterministic ranking decides; AI explains.** Reliable on stage, and
 the route choice is fully auditable.
 
-## Run locally
-
-```bash
-npm install
-cp .env.example .env.local      # paste your OpenAI key
-npm run dev                     # http://localhost:3000
-```
-
-## Deploy (Vercel, ~3 min)
-
-Push to a public GitHub repo → import on vercel.com → add `OPENAI_API_KEY` as an
-env var → Deploy. Open the resulting URL in incognito before submitting.
-
-## Demo script
-
-1. **REQ-003** — proposed a 9,300 km expedite from Taiwan; engine **reroutes to
-   local German stock**. Watch the candidate routes light up on the map.
-2. **REQ-004** — proposed source is in a **sanctioned region**; that route is
-   **blocked** and the engine reroutes to Taiwan.
-3. **REQ-005** — sits on **Optimal** by default. Drag **Prioritize speed** up and it
-   **reroutes live** to the faster lane — no reload, no model call.
-4. **REQ-001** — clean local route, auto-approved via the fast path.
-
-## Pages
-
-- `/` landing · `/console` the decision console · `/api/decide` engine endpoint
